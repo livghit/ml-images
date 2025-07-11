@@ -3,6 +3,7 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import { ref, watch } from 'vue';
 import {FileWithPreview} from "@/types";
+import { toast } from 'vue3-toastify';
 
 const form = useForm({
   photos: [] as FileWithPreview[]
@@ -11,7 +12,6 @@ const form = useForm({
 const fileInput = ref<HTMLInputElement | null>(null);
 const dropZone = ref<HTMLDivElement | null>(null);
 const isDragging = ref(false);
-const uploadMessage = ref<string | null>(null);
 
 function generatePreviews(files: FileWithPreview[]) {
   return files.map(file => {
@@ -53,11 +53,20 @@ function upload() {
         if (file.preview) URL.revokeObjectURL(file.preview);
       });
       form.reset('photos');
-      uploadMessage.value = "Upload successful!";
+      toast.success('🎉 Photos uploaded successfully! Your guests will love them!', {
+        position: 'top-right',
+        autoClose: 4000,
+      });
       if (fileInput.value) {
         fileInput.value.value = '';
       }
     },
+    onError: () => {
+      toast.error('❌ Upload failed. Please try again.', {
+        position: 'top-right',
+        autoClose: 4000,
+      });
+    }
   });
 }
 
@@ -136,8 +145,7 @@ watch(() => form.photos, (files) => {
     </div>
 
     <!-- Upload Button -->
-    <div class="mt-4 flex justify-end gap-4 items-center">
-      <p v-if="uploadMessage" class="text-sm text-green-600">{{ uploadMessage }}</p>
+    <div class="mt-4 flex justify-end">
       <PrimaryButton
         type="submit"
         :disabled="form.processing || form.photos.length === 0"
