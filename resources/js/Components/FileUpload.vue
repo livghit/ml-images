@@ -53,7 +53,7 @@ function upload() {
         if (file.preview) URL.revokeObjectURL(file.preview);
       });
       form.reset('photos');
-      toast.success('🎉 Photos uploaded successfully! Your guests will love them!', {
+      toast.success('🎉 Thank you for sharing! Your photos have been uploaded successfully!', {
         position: 'top-right',
         autoClose: 4000,
       });

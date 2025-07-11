@@ -91,7 +91,7 @@ function downloadSelected() {
 
   setTimeout(() => {
     isDownloading.value = false;
-    toast.success(`🎉 Started downloading ${selectedCount.value} photos!`);
+    toast.success(`🎉 Downloading ${selectedCount.value} beautiful memories! Enjoy!`);
   }, 1000);
 }
 
