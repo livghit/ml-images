@@ -17,8 +17,4 @@ export default defineConfig({
             },
         }),
     ],
-    build: {
-        outDir: 'public_html/build', // Output directly to public_html/build
-        emptyOutDir: true,
-    },
 });
