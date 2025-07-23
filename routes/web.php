@@ -139,7 +139,7 @@ Route::middleware([VerifyDownloadCode::class])->group(function () {
         $request
             ->session()
             ->forget(["download_code_verified", "download_code"]);
-        return redirect()->route("gallery.enter-code");
+        return redirect()->route("upload");
     })->name("gallery.logout");
 });
 
